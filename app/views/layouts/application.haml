@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %title MantleDB
+
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    %meta{"http-equiv": "x-ua-compatible", content: "ie=edge"}
+
+    - if current_account.present?
+      - if Rails.env.production?
+        %meta{ name: "action-cable-url", content: "wss://#{current_account.subdomain}.example.com:28080/ws" }
+      - else
+        %meta{ name: "action-cable-url", content: "ws://#{current_account.subdomain}.lvh.me:28080/ws" }
+
+    - if user_signed_in?
+      %meta{ name: "current-user", data: { id: current_user.id, name: current_user.name, email: current_user.email, avatar: avatar_url(current_user, "40x40") } }
+
+    = tag :meta, name: "stripe-public-key", content: ENV["STRIPE_PUBLISHABLE_KEY"]
+
+    -# if HMR is enabled, we'll load CSS via JS app so it can be hot reloaded too
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+  %body{ turbolinks? }
+    = render "layouts/past_due" if current_account.try(:past_due?)
+    = render user_signed_in? ? "layouts/navbar_loggedin" : "layouts/navbar_loggedout"
+    .container
+      - flash.each do |name, msg|
+        - if msg.is_a?(String)
+          .alert.alert-dismissible{class: "alert-#{name}", role: "alert"}
+            %button.close{type: "button", "data-dismiss": "alert", "aria-label": "Close"}
+              %span{"aria-hidden": true} &times;
+            = msg
+      = yield
+
+    = javascript_include_tag "https://js.stripe.com/v3/", "data-turbolinks-track" => true

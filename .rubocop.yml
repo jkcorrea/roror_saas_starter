@@ -1,0 +1,53 @@
+inherit_from: .rubocop.relaxed.yml
+
+AllCops:
+  TargetRubyVersion: 2.5.1
+
+  Exclude:
+    - "bin/*"
+    - "db/schema.rb"
+    - "db/migrate/*"
+    - "log/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "scripts/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+
+Documentation:
+  # Skips checking to make sure top level modules / classes have a comment.
+  Enabled: false
+
+IndentationConsistency:
+  EnforcedStyle: "indented_internal_methods"
+
+Metrics/BlockLength:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Style:
+  PreferredDelimiters:
+    Enabled: false
+
+  ClassAndModuleChildren:
+    Enabled: false
+
+  SymbolArray:
+    Enabled: false
+
+  StringLiterals:
+    EnforcedStyle: double_quotes
+    Exclude:
+      - "./*_helper.rb"
+
+# Metrics/MethodLength:
+#   Enabled: true
+#   Max: 20
+
+Metrics/LineLength:
+  Max: 100
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation

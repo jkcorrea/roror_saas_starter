@@ -1,0 +1,13 @@
+#avatar_container
+  %span.user-avatar
+    = avatar(user, :xl)
+  = form_for(user, url: avatars_path, html: { class: "form" }) do |f|
+    - if user.errors.any?
+      %h4#error_explanation
+        = "#{pluralize(user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - user.errors.full_messages.each do |message|
+          %li= message
+    = f.file_field :avatar
+    = f.submit 'Update avatar', class: 'btn btn-primary'
+  = link_to 'Delete avatar', avatar_path, method: :delete, data: { confirm: 'Are you sure?' }

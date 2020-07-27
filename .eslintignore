@@ -1,0 +1,8 @@
+# TODO was getting errors about js files not being in project config
+# we don't want top-level config files included in ts compiling, so
+# just disable linting for js files for now...
+# further reading:
+# https://stackoverflow.com/questions/58510287/parseroptions-project-has-been-set-for-typescript-eslint-parser
+*.js
+node_modules/
+dist/

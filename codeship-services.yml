@@ -1,0 +1,19 @@
+web:
+  build: ./
+  depends_on:
+    - postgres
+    - redis
+  encrypted_env_file: .env.encrypted
+  cached: true
+
+postgres:
+  image: "postgres:10-alpine"
+  environment:
+    POSTGRES_USER: "mdb"
+    POSTGRES_PASSWORD: "yourpassword"
+
+redis:
+  image: "redis:3.2-alpine"
+  command: redis-server --requirepass yourpassword
+  volumes:
+    - "redis:/data"
