@@ -1,0 +1,5 @@
+# Procfile for development using HMR
+
+rails: rails s -p 3000
+
+client: yarn dev

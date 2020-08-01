@@ -1,4 +1,12 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["app/**/*.js", "app/**/*.jsx", "app/**/*.ts", "app/**/*.tsx"]
+  "include": [
+    "*.js",
+    "config/webpack/*.js",
+    "client/**/*.js",
+    "client/**/*.jsx",
+    "client/**/*.ts",
+    "client/**/*.tsx",
+    "app/assets/*.js"
+  ]
 }

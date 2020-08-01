@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title MantleDB
+
+    meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    meta content="ie=edge" http-equiv="x-ua-compatible"
+
+    - if current_account.present?
+      - if Rails.env.production?
+        meta name="action-cable-url", content="wss://#{current_account.subdomain}.example.com:28080/ws"
+      - else
+        meta name="action-cable-url", content="ws://#{current_account.subdomain}.lvh.me:28080/ws"
+
+    - if user_signed_in?
+      = tag :meta, name: "current-user", data: { id: current_user.id, name: current_user.name, email: current_user.email, avatar: avatar_url(current_user, "40x40") }
+
+    = tag :meta, name: "stripe-public-key", content: ENV["STRIPE_PUBLISHABLE_KEY"]
+
+    = stylesheet_pack_tag 'client-registration', 'data-turbolinks-track': 'reload', media: 'all'
+    / NOTE: Must use defer and not async to keep async scripts loading in correct order
+    = javascript_packs_with_chunks_tag 'client-registration', 'data-turbolinks-track': 'reload', defer: true
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+  body *turbolinks?
+    = render "layouts/past_due" if current_account.try(:past_due?)
+    = render user_signed_in? ? "layouts/navbar_loggedin" : "layouts/navbar_loggedout"
+    .container
+      - flash.each do |name, msg|
+        - if msg.is_a?(String)
+          .alert.alert-dismissible class="alert-#{name}" role="alert"
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden=true &times;
+            = msg
+
+      = yield
+
+      / This is a placeholder for ReactOnRails to know where to render the store props for client side hydration
+      = redux_store_hydration_data
+
+    = javascript_include_tag "https://js.stripe.com/v3/", "data-turbolinks-track" => true

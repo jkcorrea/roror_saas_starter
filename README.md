@@ -1,8 +1,4 @@
-# SaaS Starter
-
-React on Ruby on Rails. Multi-tennant SaaS app with billing and some other niceties out-of-the-box :).
-
-Based off [Limestone](https://github.com/archonic/limestone-accounts), updated to Rails 6 and using [React on Rails](https://github.com/shakacode/react_on_rails) for the frontend.
+# MantleDB
 
 ## Quick Start
 

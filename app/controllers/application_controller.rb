@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   include Pundit
   include ActionView::Helpers::DateHelper
   include ApartmentHelper
+  include ReactOnRails::Controller
+
   protect_from_forgery with: :exception
   impersonates :user
   before_action :configure_permitted_parameters, if: :devise_controller?

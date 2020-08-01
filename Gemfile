@@ -27,6 +27,7 @@ gem "redis", "~> 4.0"
 # gem "bcrypt", "~> 3.1.7"
 
 # Pretty html abstractions
+gem "slim", "~> 4.1"
 gem "haml", "~> 5"
 gem "simple_form", "~> 5"
 
@@ -100,6 +101,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "slim_lint", require: false
   gem "haml-lint", require: false
   gem "rubocop"
   gem "rubocop-rspec", require: false

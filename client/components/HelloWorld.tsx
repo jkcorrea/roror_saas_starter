@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import styles from './HelloWorld.scss'
+
 interface Props {
   name: string // this is passed from the Rails view
 }
@@ -9,7 +11,8 @@ const HelloWorld: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <h3>Hello, {name}!</h3>
+      <div className={styles.test2}>asfdsadf</div>
+      <h3 className="test">Hello, {name}!</h3>
       <hr />
       <form>
         <label htmlFor="name">

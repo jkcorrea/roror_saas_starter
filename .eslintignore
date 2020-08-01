@@ -3,6 +3,5 @@
 # just disable linting for js files for now...
 # further reading:
 # https://stackoverflow.com/questions/58510287/parseroptions-project-has-been-set-for-typescript-eslint-parser
-*.js
 node_modules/
 dist/

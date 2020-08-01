@@ -25,7 +25,8 @@ ReactOnRails.configure do |config|
   #
   # Alternately, you can remove the `ReactOnRails::TestHelper.configure_rspec_to_compile_assets`
   # and set the config/webpacker.yml option for test to true.
-  config.build_test_command = "RAILS_ENV=test bin/webpack"
+
+  # config.build_test_command = "RAILS_ENV=test bin/webpack"
 
   ################################################################################
   ################################################################################
@@ -41,5 +42,11 @@ ReactOnRails.configure do |config|
   # different. You should have ONE server bundle which can create all of your server rendered
   # React components.
   #
-  config.server_bundle_js_file = "hello-world-bundle.js"
+
+  # config.server_bundle_js_file = "hello-world-bundle.js"
+
+  config.server_bundle_js_file = "server-bundle.js"
+  config.random_dom_id = false # default is true
+  config.build_test_command = "yarn run build:test"
+  config.webpack_generated_files = %w[server-bundle.js manifest.json]
 end
